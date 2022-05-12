@@ -25,7 +25,18 @@ public class Exercise2 {
 	}
 
 	public boolean esSubconjuntoSumaExt(int a[], int suma) {
-
-		return false;
+		return isSubsetSumExtreme(a, a.length, suma);
 	}
+
+  	public static boolean isSubsetSumExtreme(int[] conjunto, int n, int suma) {
+    		if(suma == 0)
+      			return true;
+    		if(n == 0)
+      			return false;
+
+    		int incrementCase1 = ((n == conjunto.length && conjunto[n - 1] % 7 == 0) || (conjunto[n - 1] % 7 == 0 && conjunto[n] != 1))? conjunto[n - 1] : 0;
+    		int incrementCase2 = (n != conjunto.length && conjunto[n - 1] % 7 == 0 && conjunto[n] == 1)? conjunto[n - 1] : 0;
+
+    		return isSubsetSumExtreme(conjunto, n - 1, suma - incrementCase1) || isSubsetSumExtreme(conjunto, n - 1, suma - conjunto[n - 1] + incrementCase2);
+  }
 }
